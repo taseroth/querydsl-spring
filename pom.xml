@@ -1,25 +1,114 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>test.faboo.org</groupId>
-  <artifactId>querydsl-spring</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>test.faboo.org</groupId>
+    <artifactId>querydsl-spring</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>querydsl-spring</name>
-  <url>http://maven.apache.org</url>
+    <name>querydsl-spring</name>
+    <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <querydsl.version>2.9.0</querydsl.version>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.10</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+    <dependencies>
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-sql</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-codegen</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-sql-codegen</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-core</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.mysema.querydsl</groupId>
+                <artifactId>querydsl-maven-plugin</artifactId>
+                <version>${querydsl.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>export</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jdbcDriver>org.postgresql.Driver</jdbcDriver>
+                    <jdbcUrl>jdbc:postgresql://localhost/querydsl</jdbcUrl>
+                    <jdbcUser>test</jdbcUser>
+                    <jdbcPassword>geheim</jdbcPassword>
+                    <packageName>org.faboo.test.querydsl.generated.qtypes</packageName>
+                    <targetFolder>${project.basedir}/target/generated-sources/java</targetFolder>
+                    <schemaPattern>public</schemaPattern>
+                    <innerClassesForKeys>true</innerClassesForKeys>
+                    <beanPackageName>org.faboo.test.querydsl.generated.beans</beanPackageName>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.1-901.jdbc4</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>msource</id>
+            <url>http://source.mysema.com/maven2/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
 </project>
