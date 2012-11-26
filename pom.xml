@@ -70,25 +70,48 @@
                 <version>${querydsl.version}</version>
                 <executions>
                     <execution>
+                        <id>eddie1</id>
                         <goals>
                             <goal>export</goal>
                         </goals>
+                        <configuration>
+                            <jdbcDriver>org.postgresql.Driver</jdbcDriver>
+                            <jdbcUrl>jdbc:postgresql://localhost/beta</jdbcUrl>
+                            <jdbcUser>betauser</jdbcUser>
+                            <jdbcPassword>geek_stuff7</jdbcPassword>
+                            <packageName>org.faboo.test.querydsl.generated.qtypes.eddie1</packageName>
+                            <nameSuffix>1</nameSuffix>
+                            <targetFolder>${project.basedir}/target/generated-sources/java</targetFolder>
+                            <schemaPattern>public</schemaPattern>
+                            <innerClassesForKeys>true</innerClassesForKeys>
+                            <beanPackageName>org.faboo.test.querydsl.generated.beans.eddie1</beanPackageName>
+                            <exportBeans>true</exportBeans>
+                            <beanSuffix>1</beanSuffix>
+                            <columnAnnotations>true</columnAnnotations>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>eddie2</id>
+                        <goals>
+                            <goal>export</goal>
+                        </goals>
+                        <configuration>
+                            <jdbcDriver>org.postgresql.Driver</jdbcDriver>
+                            <jdbcUrl>jdbc:postgresql://localhost/querydsl</jdbcUrl>
+                            <jdbcUser>test</jdbcUser>
+                            <jdbcPassword>geheim</jdbcPassword>
+                            <packageName>org.faboo.test.querydsl.generated.qtypes.eddie2</packageName>
+                            <nameSuffix>2</nameSuffix>
+                            <targetFolder>${project.basedir}/target/generated-sources/java</targetFolder>
+                            <schemaPattern>public</schemaPattern>
+                            <innerClassesForKeys>true</innerClassesForKeys>
+                            <beanPackageName>org.faboo.test.querydsl.generated.beans.eddie2</beanPackageName>
+                            <exportBeans>true</exportBeans>
+                            <beanSuffix>2</beanSuffix>
+                            <columnAnnotations>true</columnAnnotations>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <jdbcDriver>org.postgresql.Driver</jdbcDriver>
-                    <jdbcUrl>jdbc:postgresql://localhost/querydsl</jdbcUrl>
-                    <jdbcUser>test</jdbcUser>
-                    <jdbcPassword>geheim</jdbcPassword>
-                    <packageName>org.faboo.test.querydsl.generated.qtypes</packageName>
-                    <targetFolder>${project.basedir}/target/generated-sources/java</targetFolder>
-                    <schemaPattern>public</schemaPattern>
-                    <innerClassesForKeys>true</innerClassesForKeys>
-                    <beanPackageName>org.faboo.test.querydsl.generated.beans</beanPackageName>
-                    <exportBeans>true</exportBeans>
-                    <columnAnnotations>true</columnAnnotations>
-
-                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>postgresql</groupId>

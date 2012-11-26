@@ -1,20 +1,14 @@
 package org.faboo.test.querydsl;
 
 import com.mysema.query.Tuple;
-import com.mysema.query.codegen.BeanSerializer;
-import com.mysema.query.sql.Configuration;
 import com.mysema.query.sql.PostgresTemplates;
 import com.mysema.query.sql.SQLQuery;
 import com.mysema.query.sql.SQLQueryImpl;
 import com.mysema.query.sql.SQLTemplates;
-import com.mysema.query.sql.codegen.MetaDataExporter;
-import com.mysema.query.types.Projections;
 import com.mysema.query.types.QTuple;
-import com.mysema.query.types.path.BeanPath;
-import org.faboo.test.querydsl.generated.qtypes.QPlayer;
-import org.faboo.test.querydsl.model.Player;
+import org.faboo.test.querydsl.generated.beans.eddie2.Player2;
+import org.faboo.test.querydsl.generated.qtypes.eddie2.QPlayer2;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,7 +29,7 @@ public class ConsoleApp {
             SQLTemplates dialect = new PostgresTemplates();
 
             queryWithTuples(connection, dialect);
-            //queryWithBeanProjection(connection,dialect);
+            queryWithBeanProjection(connection,dialect);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,11 +48,10 @@ public class ConsoleApp {
     private static void queryWithBeanProjection(Connection connection, SQLTemplates dialect) {
         SQLQuery query = new SQLQueryImpl(connection, dialect);
 
-        QPlayer p = new QPlayer("p");//QPlayers.players;
-        List<Player> players = query.from(p).where(p.gameid.eq(2209)).list(
-                Projections.bean(Player.class, new BeanPath<Player>(Player.class,"")));
+        QPlayer2 p = QPlayer2.player;
+        List<Player2> players = query.from(p).where(p.gameid.eq(2209)).list(p);
 
-        for(Player player : players) {
+        for(Player2 player : players) {
             System.out.print(player);
 
         }
@@ -66,7 +59,7 @@ public class ConsoleApp {
 
     private static void queryWithTuples(Connection connection, SQLTemplates dialect) {
         SQLQuery query = new SQLQueryImpl(connection, dialect);
-        QPlayer p = new QPlayer("p");
+        QPlayer2 p = new QPlayer2("p");
         List<Tuple> tuples = query.from(p).where(p.gameid.eq(2209))
                 .list(new QTuple(p.gameid, p.name, p.serverid, p.guildid));
 
