@@ -85,6 +85,9 @@
                     <schemaPattern>public</schemaPattern>
                     <innerClassesForKeys>true</innerClassesForKeys>
                     <beanPackageName>org.faboo.test.querydsl.generated.beans</beanPackageName>
+                    <exportBeans>true</exportBeans>
+                    <columnAnnotations>true</columnAnnotations>
+
                 </configuration>
                 <dependencies>
                     <dependency>

@@ -2,6 +2,7 @@ package org.faboo.test.querydsl;
 
 import com.mysema.query.Tuple;
 import com.mysema.query.codegen.BeanSerializer;
+import com.mysema.query.sql.Configuration;
 import com.mysema.query.sql.PostgresTemplates;
 import com.mysema.query.sql.SQLQuery;
 import com.mysema.query.sql.SQLQueryImpl;
@@ -35,7 +36,6 @@ public class ConsoleApp {
 
             queryWithTuples(connection, dialect);
             //queryWithBeanProjection(connection,dialect);
-            generateDTO(connection, dialect);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,16 +48,6 @@ public class ConsoleApp {
                 e.printStackTrace();
             }
         }
-
-    }
-
-    private static void generateDTO(Connection connection, SQLTemplates dialect) throws SQLException {
-
-        MetaDataExporter exporter = new MetaDataExporter();
-        exporter.setPackageName("com.myproject.mydomain");
-        exporter.setTargetFolder(new File("/home/br/temp/src/main/java"));
-        exporter.setBeanSerializer(new BeanSerializer());
-        exporter.export(connection.getMetaData());
 
     }
 
@@ -83,7 +73,7 @@ public class ConsoleApp {
         for(Tuple t : tuples) {
             System.out.print("gameid=" + t.get(p.gameid) + "\n");
             System.out.print("name=" + t.get(p.name) + "\n");
-            System.out.print("server=" + t.get(p.serverid) + "\n");
+            System.out.print("serverid=" + t.get(p.serverid) + "\n");
             System.out.print("guildid=" + t.get(p.guildid) + "\n");
             System.out.print("****************************\n");
         }
